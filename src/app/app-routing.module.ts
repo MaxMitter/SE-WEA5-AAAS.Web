@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashComponent } from './dash/dash.component';
+import { DashComponent } from './pages/dash/dash.component';
+import {DetectorsComponent} from "./pages/detectors/detectors.component";
+import {ActionsComponent} from "./pages/actions/actions.component";
+import {AnalysisComponent} from "./pages/analysis/analysis.component";
 
 const routes: Routes = [
   {
@@ -11,6 +14,18 @@ const routes: Routes = [
   {
     path: 'dash',
     component: DashComponent
+  },
+  {
+    path: 'detectors',
+    component: DetectorsComponent
+  },
+  {
+    path: 'actions',
+    component: ActionsComponent
+  },
+  {
+    path: 'analysis',
+    component: AnalysisComponent
   }
 ];
 

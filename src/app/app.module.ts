@@ -7,17 +7,33 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashComponent } from './dash/dash.component';
+import { DashComponent } from './pages/dash/dash.component';
+import {HttpClientModule } from "@angular/common/http";
+import { NewgraphComponent } from './graphs/newgraph/newgraph.component';
+import { BargraphComponent } from './graphs/bargraph/bargraph.component';
+import {ChartModule} from "angular2-chartjs";
+import { HeartbeatComponent } from './cards/heartbeat/heartbeat.component';
+import { DetectorsComponent } from './pages/detectors/detectors.component';
+import { ActionsComponent } from './pages/actions/actions.component';
+import { AnalysisComponent } from './pages/analysis/analysis.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashComponent,
+    NewgraphComponent,
+    BargraphComponent,
+    HeartbeatComponent,
+    DetectorsComponent,
+    ActionsComponent,
+    AnalysisComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

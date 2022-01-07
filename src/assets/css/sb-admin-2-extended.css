@@ -1,0 +1,38 @@
+.topbar .dropdown .dropdown-menu {
+  width: calc(100% - 1.5rem);
+  right: .75rem;
+}
+
+.navbar-expand .navbar-nav .dropdown-menu {
+  position: absolute;
+}
+
+.dropdown .dropdown-menu {
+  font-size: .85rem;
+}
+
+.navbar-nav .dropdown-menu {
+  float: none;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu-right {
+  right: 0;
+  left: auto !important;
+}
+
+.sidebar-dark .nav-item .nav-link fa-icon {
+  font-size: .85rem;
+  margin-right: .25rem;
+}
+
+/* medium */
+@media (min-width: 576px) {
+  .topbar .dropdown .dropdown-menu {
+    width: auto;
+    right: 0;
+  }
+}
