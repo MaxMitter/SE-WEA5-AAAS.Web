@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {ClientInstance} from "./shared/client/client-instance";
-import {DetectorService} from "./shared/detector/detector.service";
-import {ClientService} from "./shared/client/client.service";
+import * as $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-bs4';
 
 @Component({
   selector: 'app-root',

@@ -10,6 +10,7 @@ import {catchError, map} from "rxjs/operators";
 })
 export class MetricService {
 
+  basePath: string = environment.server + '/Management';
   metrics: Metric[] = [];
 
   constructor(private http: HttpClient) { }
@@ -20,7 +21,12 @@ export class MetricService {
   }
 
   getAll(): Observable<Array<Metric>> {
-    return this.http.get<any>(`${environment.server}/Metric`)
+    return this.http.get<any>(`${this.basePath}/Metric`)
       .pipe(map(res => res['metrics']), catchError(this.errorHandler));
+  }
+
+  getAllByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
+    return this.http.get<any>(`${this.basePath}/Metric?clientInstanceId=${clientInstanceId}`)
+      .pipe(map(res => res), catchError(this.errorHandler));
   }
 }

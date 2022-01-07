@@ -16,6 +16,8 @@ import { HeartbeatComponent } from './cards/heartbeat/heartbeat.component';
 import { DetectorsComponent } from './pages/detectors/detectors.component';
 import { ActionsComponent } from './pages/actions/actions.component';
 import { AnalysisComponent } from './pages/analysis/analysis.component';
+import { HeaderComponent } from './partial/header/header.component';
+import {DataTablesModule} from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { AnalysisComponent } from './pages/analysis/analysis.component';
     DetectorsComponent,
     ActionsComponent,
     AnalysisComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { AnalysisComponent } from './pages/analysis/analysis.component';
     AppRoutingModule,
     FontAwesomeModule,
     ChartModule,
+    DataTablesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

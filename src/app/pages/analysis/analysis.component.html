@@ -1,1 +1,36 @@
-<h1 class="h3 m-2 text-gray-800">Data view</h1>
+<app-header [title]="'Data view'" (onClientChanged)="onClientChanged($event[0])"></app-header>
+
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="dataTables_wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <table id="dataTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
+                   datatable [dtOptions]="dtOptions">
+              <thead>
+              <tr role="row">
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement Name</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Created At</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Counter</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Time taken</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let metric of metricList">
+                  <td>{{ metric.measurementName }}</td>
+                  <td>{{ metric.createdAt }}</td>
+                  <td>{{ metric.measurement }}</td>
+                  <td>{{ metric.counter }}</td>
+                  <td>{{ metric.endedAt }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
