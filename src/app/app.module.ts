@@ -18,6 +18,7 @@ import { ActionsComponent } from './pages/actions/actions.component';
 import { AnalysisComponent } from './pages/analysis/analysis.component';
 import { HeaderComponent } from './partial/header/header.component';
 import {DataTablesModule} from "angular-datatables";
+import { DetectorCardComponent } from './partial/detector-card/detector-card.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {DataTablesModule} from "angular-datatables";
     ActionsComponent,
     AnalysisComponent,
     HeaderComponent,
+    DetectorCardComponent,
   ],
   imports: [
     BrowserModule,

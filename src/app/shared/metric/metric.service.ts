@@ -31,7 +31,17 @@ export class MetricService {
   }
 
   getAllCountersByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
-    return this.http.get<any>(`${this.basePath}/Metric?clientInstanceId=${clientInstanceId}`)
+    return this.http.get<any>(`${this.basePath}/Metric/Counter?clientInstanceId=${clientInstanceId}`)
+      .pipe(map(res => res), catchError(this.errorHandler));
+  }
+
+  getAllMeasurementsByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
+    return this.http.get<any>(`${this.basePath}/Metric/Measurement?clientInstanceId=${clientInstanceId}`)
+      .pipe(map(res => res), catchError(this.errorHandler));
+  }
+
+  getAllTimespansByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
+    return this.http.get<any>(`${this.basePath}/Metric/Timespan?clientInstanceId=${clientInstanceId}`)
       .pipe(map(res => res), catchError(this.errorHandler));
   }
 }

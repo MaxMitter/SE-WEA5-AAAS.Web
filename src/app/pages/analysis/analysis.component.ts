@@ -24,7 +24,8 @@ export class AnalysisComponent implements OnInit, OnDestroy {
   constructor(
     private metricService: MetricService,
     private cdRef: ChangeDetectorRef
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.reloadData();
@@ -44,20 +45,37 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     };
   }
 
-  onClientChanged(client: ClientInstance | null) : void {
+  onClientChanged(client: ClientInstance | null): void {
     this.currentClientInstance = client;
     this.reloadData();
   }
 
-  reloadData() : void{
+  reloadData(): void {
     if (this.currentClientInstance !== null) {
       if (this.showCounter) {
-
+        this.metricService.getAllCountersByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
+          for (let item of res) {
+            this.metricList.push(item);
+          }
+          this.dtTrigger.next();
+        });
       }
-      this.metricService.getAllByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
-        this.metricList = res
-        this.dtTrigger.next();
-      });
+      if (this.showMeasurement) {
+        this.metricService.getAllMeasurementsByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
+          for (let item of res) {
+            this.metricList.push(item);
+          }
+          this.dtTrigger.next();
+        });
+      }
+      if (this.showTimer) {
+        this.metricService.getAllTimespansByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
+          for (let item of res) {
+            this.metricList.push(item);
+          }
+          this.dtTrigger.next();
+        });
+      }
     }
   }
 
@@ -69,9 +87,11 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     if ($(`#counterMetric`).is(':checked')) {
       this.showCounter = true;
       this.headerList.push({title: 'Counter'});
+      this.reloadData();
     } else {
       this.showCounter = false;
       this.headerList = this.headerList.filter(header => header.title !== 'Counter');
+      this.metricList = this.metricList.filter(metric => metric.counter !== null);
     }
     this.cdRef.detectChanges();
   }
@@ -80,9 +100,11 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     if ($(`#measurementMetric`).is(':checked')) {
       this.showMeasurement = true;
       this.headerList.push({title: 'Measurement'});
+      this.reloadData();
     } else {
       this.showMeasurement = false;
       this.headerList = this.headerList.filter(header => header.title !== 'Measurement');
+      this.metricList = this.metricList.filter(metric => metric.measurement !== null);
     }
     this.cdRef.detectChanges();
   }
@@ -91,9 +113,11 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     if ($(`#timerMetric`).is(':checked')) {
       this.showTimer = true;
       this.headerList.push({title: 'Time taken'});
+      this.reloadData();
     } else {
       this.showTimer = false;
       this.headerList = this.headerList.filter(header => header.title !== 'Time taken');
+      this.metricList = this.metricList.filter(metric => metric.endedAt !== null);
     }
     this.cdRef.detectChanges();
   }

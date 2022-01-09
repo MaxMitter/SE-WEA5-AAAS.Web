@@ -1,1 +1,3 @@
-<p>detectors works!</p>
+<app-header [title]="'Detectors'" (onClientChanged)="onClientChanged($event[0])"></app-header>
+
+<app-detector-card *ngFor="let detector of detectorList" [detector]="detector"></app-detector-card>
