@@ -6,31 +6,44 @@
     <div class="table-responsive">
       <div class="dataTables_wrapper">
         <div class="row">
+          <div class="col-sm-11">
+            <input class="form-check-inline" type="checkbox" id="counterMetric" name="counterMetric" (click)="toggleCounter()">
+            <label class="form-label mr-2" for="counterMetric">Counter Metrics</label>
+            <input class="form-check-inline" type="checkbox" id="measurementMetric" name="measurementMetric" (click)="toggleMeasurement()">
+            <label class="form-label mr-2" for="measurementMetric">Measurement Metrics</label>
+            <input class="form-check-inline" type="checkbox" id="timerMetric" name="timerMetric" (click)="toggleTimer()">
+            <label class="form-label mr-2" for="timerMetric">Timer Metrics</label>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-sm-12">
             <table id="dataTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
                    datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
               <thead>
               <tr role="row">
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement Name</th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Created At</th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement</th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Counter</th>
-                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Time taken</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" *ngFor="let header of headerList">{{ header.title }}</th>
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">ID</th>-->
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement Name</th>-->
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Created At</th>-->
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showCounter">Counter</th>-->
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showMeasurement">Measurement</th>-->
+<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showTimer">Time taken</th>-->
               </tr>
               </thead>
               <tbody *ngIf="metricList?.length != 0">
                 <tr *ngFor="let metric of metricList">
+                  <td>{{ metric.id }}</td>
                   <td>{{ metric.measurementName }}</td>
                   <td>{{ metric.createdAt }}</td>
-                  <td>{{ metric.measurement }}</td>
-                  <td>{{ metric.counter }}</td>
-                  <td>{{ metric.endedAt }}</td>
+                  <td *ngIf="showCounter">{{ metric.counter }}</td>
+                  <td *ngIf="showMeasurement">{{ metric.measurement }}</td>
+                  <td *ngIf="showTimer">{{ metric.endedAt }}</td>
                 </tr>
               </tbody>
 
               <tbody *ngIf="metricList?.length == 0">
                 <tr>
-                  <td colspan="5" class="no-data-available text-center">Please select a Client to display Data</td>
+                  <td colspan="6" class="no-data-available text-center">Please select a Client to display Data</td>
                 </tr>
               </tbody>
             </table>

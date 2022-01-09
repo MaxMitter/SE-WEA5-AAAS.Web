@@ -29,4 +29,9 @@ export class MetricService {
     return this.http.get<any>(`${this.basePath}/Metric?clientInstanceId=${clientInstanceId}`)
       .pipe(map(res => res), catchError(this.errorHandler));
   }
+
+  getAllCountersByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
+    return this.http.get<any>(`${this.basePath}/Metric?clientInstanceId=${clientInstanceId}`)
+      .pipe(map(res => res), catchError(this.errorHandler));
+  }
 }
