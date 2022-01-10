@@ -22,7 +22,7 @@ export class MetricService {
 
   getAll(): Observable<Array<Metric>> {
     return this.http.get<any>(`${this.basePath}/Metric`)
-      .pipe(map(res => res['metrics']), catchError(this.errorHandler));
+      .pipe(map(res => res), catchError(this.errorHandler));
   }
 
   getAllByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {

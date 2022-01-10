@@ -2,43 +2,113 @@
 
 
 <div class="card shadow mb-4">
+  <div class="card-header">
+    <div class="row">
+
+    <h3 class="h3 mb-0 col-11">Counter Metrics</h3>
+    <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+    </div>
+  </div>
   <div class="card-body">
     <div class="table-responsive">
       <div class="dataTables_wrapper">
         <div class="row">
-          <div class="col-sm-11">
-            <input class="form-check-inline" type="checkbox" id="counterMetric" name="counterMetric" (click)="toggleCounter()">
-            <label class="form-label mr-2" for="counterMetric">Counter Metrics</label>
-            <input class="form-check-inline" type="checkbox" id="measurementMetric" name="measurementMetric" (click)="toggleMeasurement()">
-            <label class="form-label mr-2" for="measurementMetric">Measurement Metrics</label>
-            <input class="form-check-inline" type="checkbox" id="timerMetric" name="timerMetric" (click)="toggleTimer()">
-            <label class="form-label mr-2" for="timerMetric">Timer Metrics</label>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-sm-12">
-            <table id="dataTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
-                   datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <table id="counterTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
+                   datatable [dtOptions]="counterTableOptions" [dtTrigger]="counterTableTrigger">
               <thead>
               <tr role="row">
-                <th class="sorting" tabindex="0" aria-controls="dataTable" *ngFor="let header of headerList">{{ header.title }}</th>
               </tr>
               </thead>
-              <tbody *ngIf="metricList?.length != 0">
-                <tr *ngFor="let metric of metricList">
-                  <td>{{ metric.id }}</td>
-                  <td>{{ metric.measurementName }}</td>
-                  <td>{{ metric.createdAt }}</td>
-                  <td *ngIf="showCounter">{{ metric.counter }}</td>
-                  <td *ngIf="showMeasurement">{{ metric.measurement }}</td>
-                  <td *ngIf="showTimer">{{ metric.endedAt }}</td>
+              <tbody *ngIf="currentClientInstance !== null && counterMetricList?.length != 0">
+              </tbody>
+              <tbody *ngIf="currentClientInstance === null">
+                <tr>
+                  <td colspan="4" class="no-data-available text-center">Please select a Client to display Data</td>
                 </tr>
               </tbody>
+              <tbody *ngIf="currentClientInstance !== null && counterMetricList?.length == 0">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">No metrics of this type for this Client Instance</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-              <tbody *ngIf="metricList?.length == 0">
-                <tr>
-                  <td colspan="6" class="no-data-available text-center">Please select a Client to display Data</td>
-                </tr>
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <div class="row">
+
+      <h3 class="h3 mb-0 col-11">Measurement Metrics</h3>
+      <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="dataTables_wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <table id="measurementTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
+                   datatable [dtOptions]="measurementTableOptions" [dtTrigger]="measurementTableTrigger">
+              <thead>
+              <tr role="row">
+              </tr>
+              </thead>
+              <tbody *ngIf="currentClientInstance !== null && measurementMetricList?.length != 0">
+              </tbody>
+              <tbody *ngIf="currentClientInstance === null">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">Please select a Client to display Data</td>
+              </tr>
+              </tbody>
+              <tbody *ngIf="currentClientInstance !== null && measurementMetricList?.length == 0">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">No metrics of this type for this Client Instance</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <div class="row">
+
+      <h3 class="h3 mb-0 col-11">Timespan Metrics</h3>
+      <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="dataTables_wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <table id="timespanTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
+                   datatable [dtOptions]="timespanTableOptions" [dtTrigger]="timespanTableTrigger">
+              <thead>
+              <tr role="row">
+              </tr>
+              </thead>
+              <tbody *ngIf="currentClientInstance !== null && timespanMetricList?.length != 0">
+              </tbody>
+              <tbody *ngIf="currentClientInstance === null">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">Please select a Client to display Data</td>
+              </tr>
+              </tbody>
+              <tbody *ngIf="currentClientInstance !== null && timespanMetricList?.length == 0">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">No metrics of this type for this Client Instance</td>
+              </tr>
               </tbody>
             </table>
           </div>

@@ -6,32 +6,12 @@
   <h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>
 
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown no-arrow d-sm-none">
-      <a id="searchDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-         aria-haspopup="true" aria-expanded="false">
-        <fa-icon icon="search" [fixedWidth]></fa-icon>
-      </a>
-
-      <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-        <form class="form-inline mr-auto w-100 navbar-search">
-          <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <fa-icon icon="search" size="sm"></fa-icon>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </li>
 
     <li class="nav-item dropdown no-arrow">
       <button id="clientDropdown" class="nav-link btn" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-        <span class="mr-2 d-none d-lg-inline text-gray-600" *ngIf="currentClient == null">All Clients</span>
-        <span class="mr-2 d-none d-lg-inline text-gray-600"
+        <span class="mr-2 d-lg-inline text-gray-600" *ngIf="currentClient == null">All Clients</span>
+        <span class="mr-2 d-lg-inline text-gray-600"
               *ngIf="currentClient != null">{{currentClient.identifier}}</span>
       </button>
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="clientDropdown">

@@ -3,7 +3,8 @@ export class Metric {
     public id?: string,
     public clientInstanceId?: string,
     public measurementName?: string,
-    public createdAt?: bigint,
+    public createdAt?: number,
+    public createAtDate?: Date,
     public measurement?: number,
     public counter?: number,
     public endedAt?: number
