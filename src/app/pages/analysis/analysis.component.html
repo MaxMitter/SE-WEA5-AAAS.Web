@@ -22,12 +22,6 @@
               <thead>
               <tr role="row">
                 <th class="sorting" tabindex="0" aria-controls="dataTable" *ngFor="let header of headerList">{{ header.title }}</th>
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">ID</th>-->
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Measurement Name</th>-->
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1">Created At</th>-->
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showCounter">Counter</th>-->
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showMeasurement">Measurement</th>-->
-<!--                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" *ngIf="showTimer">Time taken</th>-->
               </tr>
               </thead>
               <tbody *ngIf="metricList?.length != 0">

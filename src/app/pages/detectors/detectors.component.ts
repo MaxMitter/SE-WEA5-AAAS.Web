@@ -18,6 +18,10 @@ export class DetectorsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadDetectors();
+  }
+
+  loadDetectors() {
     if (this.currentClientInstance != null) {
       this.detectorService.getAllByClientInstance(this.currentClientInstance.id).subscribe(res => {
         this.detectorList = res;
@@ -27,5 +31,6 @@ export class DetectorsComponent implements OnInit {
 
   onClientChanged(clientInstance: ClientInstance) {
     this.currentClientInstance = clientInstance;
+    this.loadDetectors();
   }
 }

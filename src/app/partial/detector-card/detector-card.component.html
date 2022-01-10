@@ -1,3 +1,31 @@
-<div class="card">
-
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary col-10">{{ detector.name }}</h6>
+    <button class="btn btn-success col-2" *ngIf="!detector.isActive" (click)="toggleDetector()">Activate</button>
+    <button class="btn btn-danger col-2" *ngIf="detector.isActive" (click)="toggleDetector()">Deactivate</button>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <div *ngIf="isEditMode">
+          <form class="form-inline">
+            <div class="form-group mb-2">
+              <label for="measurementName" class="form-label mr-2">Measurement Name:</label>
+              <input id="measurementName" type="text" placeholder="Measurement Name" class="form-control"
+                     value="{{detector.measurementName}}">
+            </div>
+            <div class="form-group mb-2">
+              <label for="detectorInterval" class="form-label mr-2">Interval (in Milliseconds):</label>
+              <input id="detectorInterval" type="number" placeholder="Interval in ms" class="form-control"
+                    value="{{detector.detectorInterval}}">
+            </div>
+            <div class="form-group mb-2">
+              <label for="fromTime" class="form-label mr-2">From Time:</label>
+              <input id="fromTime" type="number" placeholder="Time from" class="form-control" value="{{detector.fromTime}}">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
