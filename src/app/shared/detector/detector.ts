@@ -7,13 +7,19 @@ export class Detector {
     public minValue?: number,
     public maxValue?: number,
     public detectorInterval?: bigint,
-    public fromTime?: bigint,
-    public toTime?: bigint,
+    public fromTime?: number,
+    public toTime?: number,
     public lastMeasures?: number,
-    public listOperation?: string,
+    public listOperation?: ListOperation,
     public maxOutliers?: number,
     public detectorActionId?: string,
     public isActive?: boolean
   ) {
   }
+}
+
+export enum ListOperation {
+  NoOperation = 'NoOperation',
+  Heartbeat = 'Heartbeat',
+  Avg = 'Avg'
 }

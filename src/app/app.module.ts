@@ -20,6 +20,8 @@ import { HeaderComponent } from './partial/header/header.component';
 import {DataTablesModule} from "angular-datatables";
 import { DetectorCardComponent } from './partial/detector-card/detector-card.component';
 import {TicksToDatePipe} from "./pipes/tickstodatepipe";
+import {ReactiveFormsModule} from "@angular/forms";
+import {TicksToTimespanPipe} from "./pipes/ticksToTimespanPipe";
 
 @NgModule({
   declarations: [
@@ -33,16 +35,18 @@ import {TicksToDatePipe} from "./pipes/tickstodatepipe";
     AnalysisComponent,
     HeaderComponent,
     DetectorCardComponent,
-    TicksToDatePipe
+    TicksToDatePipe,
+    TicksToTimespanPipe
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    ChartModule,
-    DataTablesModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        ChartModule,
+        DataTablesModule,
+        ReactiveFormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

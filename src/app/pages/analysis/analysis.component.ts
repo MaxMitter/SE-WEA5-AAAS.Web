@@ -31,7 +31,6 @@ export class AnalysisComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.counterTableOptions = this.getBaseOptions();
     this.counterTableOptions.data = this.counterMetricList;
     this.counterTableOptions?.columns?.push({title: 'Counter', data: 'counter'});
