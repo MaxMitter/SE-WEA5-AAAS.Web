@@ -3,6 +3,7 @@ import {Metric} from "../../shared/metric/metric";
 import {MetricService} from "../../shared/metric/metric.service";
 import {ClientInstance} from "../../shared/client/client-instance";
 import {Subject} from "rxjs";
+import {TicksToDatePipe} from "../../pipes/tickstodatepipe";
 
 @Component({
   selector: 'app-analysis',
@@ -31,29 +32,9 @@ export class AnalysisComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 15,
-      processing: true,
-      language: {
-        processing: '<fa-icon icon="spinner" spin></fa-icon>'
-      },
-      columns: [{
-        title: 'ID',
-        data: 'id'
-      }, {
-        title: 'Measurement Name',
-        data: 'measurementName'
-      }, {
-        title: 'Created At',
-        data: 'createdAtDate'
-      }],
-      destroy: true
-    };
-
     this.counterTableOptions = this.getBaseOptions();
     this.counterTableOptions.data = this.counterMetricList;
-    this.counterTableOptions?.columns?.push({ title: 'Counter', data: 'counter'});
+    this.counterTableOptions?.columns?.push({title: 'Counter', data: 'counter'});
 
     this.measurementTableOptions = this.getBaseOptions();
     this.measurementTableOptions.data = this.measurementMetricList;
@@ -66,7 +47,7 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     this.reloadData();
   }
 
-  getBaseOptions() : DataTables.Settings {
+  getBaseOptions(): DataTables.Settings {
     return {
       pagingType: 'full_numbers',
       pageLength: 15,
@@ -82,7 +63,7 @@ export class AnalysisComponent implements OnInit, OnDestroy {
         data: 'measurementName'
       }, {
         title: 'Created At',
-        data: 'createdAt'
+        data: 'createdAtDate'
       }],
       destroy: true
     };
@@ -106,8 +87,8 @@ export class AnalysisComponent implements OnInit, OnDestroy {
 
   reloadMesurementMetrics(): void {
     if (this.currentClientInstance !== null) {
+      //this.measurementMetricList = [];
       this.metricService.getAllMeasurementsByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
-
         for (let item of res) {
           this.measurementMetricList.push(item);
         }
@@ -118,7 +99,6 @@ export class AnalysisComponent implements OnInit, OnDestroy {
 
   reloadTimespanMetric(): void {
     if (this.currentClientInstance !== null) {
-
       this.metricService.getAllTimespansByClientInstanceId(this.currentClientInstance.id).subscribe(res => {
         for (let item of res) {
           this.timespanMetricList.push(item);
@@ -128,7 +108,7 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     }
   }
 
-  reloadData() : void {
+  reloadData(): void {
     this.reloadCounterMetrics();
     this.reloadMesurementMetrics();
     this.reloadTimespanMetric();
@@ -138,5 +118,22 @@ export class AnalysisComponent implements OnInit, OnDestroy {
     this.counterTableTrigger.unsubscribe();
     this.measurementTableTrigger.unsubscribe();
     this.timespanTableTrigger.unsubscribe();
+  }
+
+  refreshData(metricType: string) {
+    switch (metricType) {
+      case 'counter':
+        this.counterMetricList = [];
+        this.reloadCounterMetrics();
+        break;
+      case 'measurement':
+        this.measurementMetricList = [];
+        this.reloadMesurementMetrics();
+        break;
+      case 'timespan':
+        this.timespanMetricList = [];
+        this.reloadTimespanMetric();
+        break;
+    }
   }
 }

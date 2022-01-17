@@ -6,7 +6,7 @@
     <div class="row">
 
     <h3 class="h3 mb-0 col-11">Counter Metrics</h3>
-    <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+    <button class="btn btn-outline-primary col-1" (click)="refreshData('counter')"><fa-icon icon="sync-alt"></fa-icon> </button>
     </div>
   </div>
   <div class="card-body">
@@ -45,7 +45,7 @@
     <div class="row">
 
       <h3 class="h3 mb-0 col-11">Measurement Metrics</h3>
-      <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+      <button class="btn btn-outline-primary col-1" (click)="refreshData('measurement')"><fa-icon icon="sync-alt"></fa-icon> </button>
     </div>
   </div>
   <div class="card-body">
@@ -82,9 +82,8 @@
 <div class="card shadow mb-4">
   <div class="card-header">
     <div class="row">
-
       <h3 class="h3 mb-0 col-11">Timespan Metrics</h3>
-      <button class="btn btn-outline-primary col-1"><fa-icon icon="sync-alt"></fa-icon> </button>
+      <button class="btn btn-outline-primary col-1" (click)="refreshData('timespan')"><fa-icon icon="sync-alt"></fa-icon> </button>
     </div>
   </div>
   <div class="card-body">

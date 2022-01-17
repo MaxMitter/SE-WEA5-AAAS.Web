@@ -31,17 +31,59 @@ export class MetricService {
   }
 
   getAllCountersByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
-    return this.http.get<any>(`${this.basePath}/Metric/Counter?clientInstanceId=${clientInstanceId}`)
-      .pipe(map(res => res), catchError(this.errorHandler));
+    return this.http.get<Array<Metric>>(`${this.basePath}/Metric/Counter?clientInstanceId=${clientInstanceId}`)
+      .pipe(map((res: Array<Metric>) => {
+        let returnList: Metric[] = [];
+        for (let m of res) {
+          returnList.push(new Metric(
+            m.id,
+            m.clientInstanceId,
+            m.measurementName,
+            m.createdAt,
+            m.measurement,
+            m.counter,
+            m.endedAt
+          ));
+        }
+        return returnList;
+      }), catchError(this.errorHandler));
   }
 
   getAllMeasurementsByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
     return this.http.get<any>(`${this.basePath}/Metric/Measurement?clientInstanceId=${clientInstanceId}`)
-      .pipe(map(res => res), catchError(this.errorHandler));
+      .pipe(map((res: Array<Metric>) => {
+        let returnList: Metric[] = [];
+        for (let m of res) {
+          returnList.push(new Metric(
+            m.id,
+            m.clientInstanceId,
+            m.measurementName,
+            m.createdAt,
+            m.measurement,
+            m.counter,
+            m.endedAt
+          ));
+        }
+        return returnList;
+      }), catchError(this.errorHandler));
   }
 
   getAllTimespansByClientInstanceId(clientInstanceId: string) : Observable<Array<Metric>> {
     return this.http.get<any>(`${this.basePath}/Metric/Timespan?clientInstanceId=${clientInstanceId}`)
-      .pipe(map(res => res), catchError(this.errorHandler));
+      .pipe(map((res: Array<Metric>) => {
+        let returnList: Metric[] = [];
+        for (let m of res) {
+          returnList.push(new Metric(
+            m.id,
+            m.clientInstanceId,
+            m.measurementName,
+            m.createdAt,
+            m.measurement,
+            m.counter,
+            m.endedAt
+          ));
+        }
+        return returnList;
+      }), catchError(this.errorHandler));
   }
 }
