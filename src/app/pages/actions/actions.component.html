@@ -1,1 +1,3 @@
-<p>actions works!</p>
+<app-header [title]="'Actions'" (onClientChanged)="clientChangedEvent($event[0])"></app-header>
+
+<app-action-card *ngFor="let action of actionList" [action]=action></app-action-card>

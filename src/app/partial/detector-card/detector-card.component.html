@@ -1,15 +1,26 @@
 <div class="card shadow mb-4">
   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
     <h6 class="m-0 font-weight-bold text-primary col-9" *ngIf="!isEditMode">{{ detector.name }}</h6>
-    <input type="text" class="m-0 font-weight-bold text-primary col-9 mr-2" *ngIf="isEditMode" value="{{detector.name}}">
-    <button class="btn btn-success col-2 mr-2" *ngIf="!detector.isActive" (click)="toggleDetector()">Activate</button>
-    <button class="btn btn-danger col-2 mr-2" *ngIf="detector.isActive" (click)="toggleDetector()">Deactivate</button>
-    <button class="btn btn-outline-primary col-1" *ngIf="!isEditMode">
-      <fa-icon icon="pen"></fa-icon>
-    </button>
-    <button class="btn btn-outline-success col-1" *ngIf="isEditMode">
+    <input type="text" class="m-0 font-weight-bold text-primary col-9 mr-2" *ngIf="isEditMode"
+           value="{{detector.name}}">
+    <button class="btn btn-success col-2 mr-1" *ngIf="!detector.isActive" (click)="toggleDetector()">Activate</button>
+    <button class="btn btn-danger col-2 mr-1" *ngIf="detector.isActive" (click)="toggleDetector()">Deactivate</button>
+    <div class="btn-group">
+      <button class="btn btn-outline-primary" *ngIf="!isEditMode">
+        <fa-icon icon="pen"></fa-icon>
+      </button>
+      <button class="btn btn-outline-primary" *ngIf="!isEditMode">
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn btn-outline-success" *ngIf="isEditMode">
       <fa-icon icon="save"></fa-icon>
     </button>
+      <button class="btn btn-outline-danger" *ngIf="isEditMode">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
   </div>
   <div class="card-body">
     <div class="row">
@@ -29,7 +40,7 @@
             <div class="form-group mb-2 container p-0">
               <div class="row">
                 <div class="d-inline col">
-                  <label for="fromTime" class="form-label mr-2 d-block">From Time:</label>
+                  <label for="fromTimeHours" class="form-label mr-2 d-block">From Time:</label>
                   <input id="fromTimeHours" type="number" class="form-control d-inline col-2 text-center p-0"
                          value="{{ (detector.fromTime | TicksToTimespanPipe).hours}}" min="0">
                   <p class="d-inline ml-1 mr-1">:</p>
@@ -43,7 +54,7 @@
                          value="{{ (detector.fromTime | TicksToTimespanPipe).ms}}" min="0">
                 </div>
                 <div class="d-inline col">
-                  <label for="toTime" class="form-label mr-2 d-block">To Time:</label>
+                  <label for="toTimeHours" class="form-label mr-2 d-block">To Time:</label>
                   <input id="toTimeHours" type="number" class="form-control d-inline col-2 text-center p-0"
                          value="{{ (detector.toTime | TicksToTimespanPipe).hours}}" min="0">
                   <p class="d-inline ml-1 mr-1">:</p>

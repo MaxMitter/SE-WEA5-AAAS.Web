@@ -8,7 +8,7 @@ export class Action {
   }
 }
 
-enum ActionType {
-  Email,
-  Webhook
+export enum ActionType {
+  Email = 'Email',
+  Webhook = 'Webhook'
 }

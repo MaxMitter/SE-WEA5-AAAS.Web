@@ -1,0 +1,29 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary col-9">{{action.actionType}} | {{action.actionTarget}}</h6>
+    <div class="btn-group" *ngIf="isEditMode">
+      <button class="btn btn-outline-success" ngbTooltip="Save" placement="top" (click)="saveChanges()">
+        <fa-icon icon="save"></fa-icon>
+      </button>
+      <button class="btn btn-outline-danger" ngbTooltip="Cancel" placement="top">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="isEditMode">
+
+      <form class="form" [formGroup]="actionForm" novalidate>
+        <label for="type" class="form-label">Action Type</label>
+        <select id="type" class="form-select custom-select mb-2" formControlName="typeSelector">
+          <option *ngFor="let type of actionTypes" value="{{type}}">{{type}}</option>
+        </select>
+
+        <label for="target" class="form-label">Target URL</label>
+        <input id="target" type="text" placeholder="Target" class="form-control" value="{{action.actionTarget}}"
+               (keydown)="validateTarget()" required>
+      </form>
+
+    </div>
+  </div>
+</div>

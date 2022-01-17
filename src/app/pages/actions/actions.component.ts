@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ClientInstance} from "../../shared/client/client-instance";
+import {Action} from "../../shared/action/action";
+import {ActionService} from "../../shared/action/action.service";
 
 @Component({
   selector: 'app-actions',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActionsComponent implements OnInit {
 
-  constructor() { }
+  currentClientInstance: ClientInstance | null = null;
+  actionList: Action[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private actionService: ActionService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.loadActions();
+  }
+
+  loadActions(): void {
+    if (this.currentClientInstance !== null)
+      this.actionService.getAllByClientInstanceId(this.currentClientInstance.id).subscribe(res => this.actionList = res);
+  }
+
+  clientChangedEvent(clientInstance: ClientInstance) {
+    this.currentClientInstance = clientInstance;
+    this.loadActions();
+  }
 }
