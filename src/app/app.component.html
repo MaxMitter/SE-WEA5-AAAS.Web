@@ -2,16 +2,16 @@
   <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
     <a class="sidebar-brand d-flex align-items-center justify-content-center">Test</a>
     <hr class="sidebar-divider my-0"/>
-    <li class="nav-item active">
-      <a class="nav-link" href="dash">
+    <li class="nav-item active" id="dash">
+      <a class="nav-link" href="dash" (click)="setActivePage('dash')">
         <fa-icon icon="tachometer-alt" [fixedWidth]></fa-icon>
         <span>Dashboard</span>
       </a>
     </li>
     <hr class="sidebar-divider"/>
-    <div class="sidebar-heading">Detectors & Actions</div>
-    <li class="nav-item">
-      <a class="nav-link" href="detectors">
+    <div class="sidebar-heading">Manager</div>
+    <li class="nav-item" id="detectors">
+      <a class="nav-link" href="detectors" (click)="setActivePage('detectors')">
         <fa-icon icon="binoculars"></fa-icon>
         <span>Detectors</span>
       </a>
@@ -23,11 +23,21 @@
       </a>
     </li>
     <hr class="sidebar-divider"/>
+    <div class="sidebar-heading">Data</div>
     <li class="nav-item">
-      <a class="nav-link" href="analysis">
+      <a class="nav-link collapsed" (click)="$event.preventDefault(); analysisIsCollapsed = !analysisIsCollapsed;" href=""
+         [attr.aria-expanded]="!analysisIsCollapsed" aria-controls="collapseAnalysis">
         <fa-icon icon="table"></fa-icon>
         <span>Data view</span>
       </a>
+      <div id="collapseAnalysis" class="collapse" [ngbCollapse]="analysisIsCollapsed">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Metric Types:</h6>
+          <a class="collapse-item" href="#">Counter Metrics</a>
+          <a class="collapse-item" href="#">Measurement Metrics</a>
+          <a class="collapse-item" href="#">Timespan Metrics</a>
+        </div>
+      </div>
     </li>
     <hr class="sidebar-divider"/>
     <div class="text-center d-none d-md-inline">

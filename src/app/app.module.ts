@@ -9,8 +9,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {DashComponent} from './pages/dash/dash.component';
 import {HttpClientModule} from "@angular/common/http";
-import {NewgraphComponent} from './graphs/newgraph/newgraph.component';
-import {BargraphComponent} from './graphs/bargraph/bargraph.component';
+import {NewchartComponent} from './charts/newchart/newchart.component';
+import {BarchartComponent} from './charts/barchart/barchart.component';
 import {ChartModule} from "angular2-chartjs";
 import {HeartbeatComponent} from './cards/heartbeat/heartbeat.component';
 import {DetectorsComponent} from './pages/detectors/detectors.component';
@@ -20,17 +20,20 @@ import {HeaderComponent} from './partial/header/header.component';
 import {DataTablesModule} from "angular-datatables";
 import {DetectorCardComponent} from './partial/detector-card/detector-card.component';
 import {TicksToDatePipe} from "./pipes/tickstodatepipe";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TicksToTimespanPipe} from "./pipes/ticksToTimespanPipe";
 import {ActionCardComponent} from './partial/action-card/action-card.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { EditChartComponent } from './charts/editchart/edit-chart.component';
+import { LinechartComponent } from './charts/linechart/linechart.component';
+import { PiechartComponent } from './charts/piechart/piechart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashComponent,
-    NewgraphComponent,
-    BargraphComponent,
+    NewchartComponent,
+    BarchartComponent,
     HeartbeatComponent,
     DetectorsComponent,
     ActionsComponent,
@@ -39,7 +42,10 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     DetectorCardComponent,
     TicksToDatePipe,
     TicksToTimespanPipe,
-    ActionCardComponent
+    ActionCardComponent,
+    EditChartComponent,
+    LinechartComponent,
+    PiechartComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     DataTablesModule,
     ReactiveFormsModule,
     NgbModule,
+    ChartModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

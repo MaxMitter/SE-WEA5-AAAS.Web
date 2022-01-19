@@ -7,10 +7,14 @@ import * as $ from "jquery";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewChecked{
+export class AppComponent {
   title = 'AAAS';
+  public analysisIsCollapsed = true;
 
-  ngAfterViewChecked(): void {
-    //$('[data-toggle="tooltip"]').tooltip();
+  setActivePage(page: string): void {
+    let active = $("#active");
+    console.log(active);
+    $("#active").removeClass('active');
+    $(`.${page}`).addClass('active');
   }
 }
