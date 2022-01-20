@@ -1,0 +1,19 @@
+<app-header [title]="'Client Instances'" (onClientChanged)="clientChanges($event[0])"></app-header>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <button class="btn w-100" (click)="createNewClient()">
+          <div class="card-body">
+            <fa-icon icon="plus"></fa-icon>
+            <span class="ml-2">New Client</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="col-4" *ngFor="let client of clientList">
+      <app-clientcard [client]="client" (onClientDelete)="deleteClient($event[0])"></app-clientcard>
+    </div>
+  </div>
+</div>

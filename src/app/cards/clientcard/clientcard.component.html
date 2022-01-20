@@ -1,0 +1,41 @@
+<form *ngIf="isEditMode" [formGroup]="form">
+  <div class="card">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary col-9">{{client.identifier}}</h6>
+      <div class="btn-group col-2">
+        <button class="btn btn-outline-success" ngbTooltip="Save" placement="top" type="submit" (click)="onSubmit()">
+          <fa-icon icon="save"></fa-icon>
+        </button>
+        <button class="btn btn-outline-danger" ngbTooltip="Cancel" placement="top" (click)="cancelEdit()">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <input id="identifier" type="text" placeholder="Client Name" value="{{ client.identifier }}"
+               class="form-control" required formControlName="identifier"/>
+        <div class="form-group" [ngClass]="displayFieldCss('identifier')" *ngIf="!isValid">
+          Identifier is required!
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="card" *ngIf="!isEditMode">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary col-9">{{client.identifier}}</h6>
+    <div class="btn-group col-2">
+      <button class="btn btn-outline-warning" ngbTooltip="Edit" placement="top" (click)="editClient()">
+        <fa-icon icon="pen"></fa-icon>
+      </button>
+      <button class="btn btn-outline-danger" ngbTooltip="Delete" placement="top" (click)="deleteClient()" *ngIf="false">
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <label class="form-label">{{client.identifier}}</label>
+  </div>
+</div>

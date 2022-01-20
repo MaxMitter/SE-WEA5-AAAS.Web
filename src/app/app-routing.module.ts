@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DashComponent } from './pages/dash/dash.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {DashComponent} from './pages/dash/dash.component';
 import {DetectorsComponent} from "./pages/detectors/detectors.component";
 import {ActionsComponent} from "./pages/actions/actions.component";
 import {AnalysisComponent} from "./pages/analysis/analysis.component";
+import {ClientsComponent} from "./pages/clients/clients.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'analysis',
     component: AnalysisComponent
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent
   }
 ];
 
@@ -33,4 +38,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

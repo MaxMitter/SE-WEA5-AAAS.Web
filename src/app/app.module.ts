@@ -27,6 +27,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { EditChartComponent } from './charts/editchart/edit-chart.component';
 import { LinechartComponent } from './charts/linechart/linechart.component';
 import { PiechartComponent } from './charts/piechart/piechart.component';
+import { ClientsComponent } from './pages/clients/clients.component';
+import { ClientcardComponent } from './cards/clientcard/clientcard.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { PiechartComponent } from './charts/piechart/piechart.component';
     ActionCardComponent,
     EditChartComponent,
     LinechartComponent,
-    PiechartComponent
+    PiechartComponent,
+    ClientsComponent,
+    ClientcardComponent
   ],
   imports: [
     BrowserModule,
