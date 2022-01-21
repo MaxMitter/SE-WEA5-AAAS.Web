@@ -28,9 +28,6 @@ export class MeasurementmetricComponent implements OnInit {
         processing: '<fa-icon icon="spinner" spin></fa-icon>'
       },
       columns: [{
-        title: 'ID',
-        data: 'id'
-      }, {
         title: 'Measurement Name',
         data: 'measurementName'
       }, {
