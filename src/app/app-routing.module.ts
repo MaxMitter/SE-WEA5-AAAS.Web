@@ -7,6 +7,7 @@ import {ClientsComponent} from "./pages/clients/clients.component";
 import {CountermetricComponent} from './pages/countermetric/countermetric.component';
 import {TimespanmetricComponent} from './pages/timespanmetric/timespanmetric.component';
 import {MeasurementmetricComponent} from './pages/measurementmetric/measurementmetric.component';
+import {LogmessageComponent} from "./pages/logmessage/logmessage.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,9 @@ const routes: Routes = [
   }, {
     path: 'measurementmetric',
     component: MeasurementmetricComponent
+  }, {
+    path: 'logmessage',
+    component: LogmessageComponent
   }
 ];
 
