@@ -15,7 +15,6 @@ import {ChartModule} from "angular2-chartjs";
 import {HeartbeatComponent} from './cards/heartbeat/heartbeat.component';
 import {DetectorsComponent} from './pages/detectors/detectors.component';
 import {ActionsComponent} from './pages/actions/actions.component';
-import {AnalysisComponent} from './pages/analysis/analysis.component';
 import {HeaderComponent} from './partial/header/header.component';
 import {DataTablesModule} from "angular-datatables";
 import {DetectorCardComponent} from './partial/detector-card/detector-card.component';
@@ -29,6 +28,10 @@ import { LinechartComponent } from './charts/linechart/linechart.component';
 import { PiechartComponent } from './charts/piechart/piechart.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { ClientcardComponent } from './cards/clientcard/clientcard.component';
+import { CountermetricComponent } from './pages/countermetric/countermetric.component';
+import { TimespanmetricComponent } from './pages/timespanmetric/timespanmetric.component';
+import { MeasurementmetricComponent } from './pages/measurementmetric/measurementmetric.component';
+import { LogmessageComponent } from './pages/logmessage/logmessage.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,6 @@ import { ClientcardComponent } from './cards/clientcard/clientcard.component';
     HeartbeatComponent,
     DetectorsComponent,
     ActionsComponent,
-    AnalysisComponent,
     HeaderComponent,
     DetectorCardComponent,
     TicksToDatePipe,
@@ -49,7 +51,11 @@ import { ClientcardComponent } from './cards/clientcard/clientcard.component';
     LinechartComponent,
     PiechartComponent,
     ClientsComponent,
-    ClientcardComponent
+    ClientcardComponent,
+    CountermetricComponent,
+    TimespanmetricComponent,
+    MeasurementmetricComponent,
+    LogmessageComponent
   ],
   imports: [
     BrowserModule,

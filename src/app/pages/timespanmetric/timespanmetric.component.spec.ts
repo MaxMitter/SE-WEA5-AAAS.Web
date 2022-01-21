@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnalysisComponent } from './analysis.component';
+import { TimespanmetricComponent } from './timespanmetric.component';
 
-describe('AnalysisComponent', () => {
-  let component: AnalysisComponent;
-  let fixture: ComponentFixture<AnalysisComponent>;
+describe('TimespanmetricComponent', () => {
+  let component: TimespanmetricComponent;
+  let fixture: ComponentFixture<TimespanmetricComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnalysisComponent ]
+      declarations: [ TimespanmetricComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnalysisComponent);
+    fixture = TestBed.createComponent(TimespanmetricComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

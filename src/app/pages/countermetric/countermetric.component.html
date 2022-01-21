@@ -1,0 +1,40 @@
+<app-header [title]="'Counter Metrics'" (onClientChanged)="onClientChanged($event[0])"></app-header>
+
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <div class="row">
+
+      <h3 class="h3 mb-0 col-11">Counter Metrics</h3>
+      <button class="btn btn-outline-primary col-1" (click)="reloadData()"><fa-icon icon="sync-alt"></fa-icon> </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="dataTables_wrapper">
+        <div class="row">
+          <div class="col-sm-12">
+            <table id="counterTable" class="table table-bordered dataTable" role="grid" aria-describedby="Metric Data"
+                   datatable [dtOptions]="dtOptions" [dtTrigger]="tableTrigger">
+              <thead>
+              <tr role="row">
+              </tr>
+              </thead>
+              <tbody *ngIf="currentClientInstance !== null && metricList?.length != 0">
+              </tbody>
+              <tbody *ngIf="currentClientInstance === null">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">Please select a Client to display Data</td>
+              </tr>
+              </tbody>
+              <tbody *ngIf="currentClientInstance !== null && metricList?.length == 0">
+              <tr>
+                <td colspan="4" class="no-data-available text-center">No metrics of this type for this Client Instance</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

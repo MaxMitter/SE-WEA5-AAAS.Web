@@ -39,18 +39,19 @@
       <div id="collapseAnalysis" class="collapse" [ngbCollapse]="analysisIsCollapsed">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Metric Types:</h6>
-          <a class="collapse-item" href="#">Counter Metrics</a>
-          <a class="collapse-item" href="#">Measurement Metrics</a>
-          <a class="collapse-item" href="#">Timespan Metrics</a>
+          <a class="collapse-item" href="countermetric">Counter Metrics</a>
+          <a class="collapse-item" href="measurementmetric">Measurement Metrics</a>
+          <a class="collapse-item" href="timespanmetric">Timespan Metrics</a>
         </div>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="logmessage">
+        <fa-icon icon="align-justify"></fa-icon>
+        <span>Log Messages</span>
+      </a>
+    </li>
     <hr class="sidebar-divider"/>
-    <div class="text-center d-none d-md-inline">
-      <button id="sidebarToggle" class="rounded-circle border-0">
-
-      </button>
-    </div>
   </ul>
   <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
