@@ -16,7 +16,6 @@ export class ClientcardComponent implements OnInit {
   isEditMode: boolean = false;
 
   isValid: boolean = true;
-
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private clientService: ClientService) {

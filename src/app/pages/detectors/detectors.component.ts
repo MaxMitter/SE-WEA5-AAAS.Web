@@ -33,4 +33,8 @@ export class DetectorsComponent implements OnInit {
     this.currentClientInstance = clientInstance;
     this.loadDetectors();
   }
+
+  removeDetector(detectorId: string) {
+    this.detectorList = this.detectorList.filter(detector => detector.id != detectorId);
+  }
 }
