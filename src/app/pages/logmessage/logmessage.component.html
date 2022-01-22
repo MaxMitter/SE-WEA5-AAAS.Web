@@ -1,6 +1,14 @@
 <app-header [title]="'Logmessages'" (onClientChanged)="onClientChanged($event[0])"></app-header>
 
 <div class="card shadow mb-4">
+<!--  <div class="card-header">-->
+<!--    <input class="form-check-inline" type="checkbox" id="Trace" checked (click)="updateData('Trace')"/>-->
+<!--    <label class="form-label mr-2">Trace</label>-->
+<!--    <input class="form-check-inline" type="checkbox" id="Warning" checked (click)="updateData('Warning')"/>-->
+<!--    <label class="form-label mr-2">Warning</label>-->
+<!--    <input class="form-check-inline" type="checkbox" id="Error" checked (click)="updateData('Error')"/>-->
+<!--    <label class="form-label mr-2">Error</label>-->
+<!--  </div>-->
   <div class="card-body">
     <div class="table-responsive">
       <div class="dataTables_wrapper">
@@ -8,7 +16,6 @@
           <div class="col-sm-12">
             <table id="logMessageTable" class="table table-bordered dataTable" role="grid"
                    datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
-
             </table>
           </div>
         </div>
