@@ -34,4 +34,12 @@ export class ActionService {
         }),
         catchError(this.errorHandler));
   }
+
+  updateAction(action: Action): Observable<boolean> {
+    return this.http.put<any>(`${this.basePath}/${action.id}`, action, {'headers': this.header});
+  }
+
+  deleteAction(actionId: string): Observable<boolean> {
+    return this.http.delete<any>(`${this.basePath}/${actionId}`, {'headers': this.header});
+  }
 }

@@ -1,29 +1,43 @@
-<div class="card shadow mb-4">
-  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold text-primary col-9">{{action.actionType}} | {{action.actionTarget}}</h6>
-    <div class="btn-group" *ngIf="isEditMode">
-      <button class="btn btn-outline-success" ngbTooltip="Save" placement="top" (click)="saveChanges()">
-        <fa-icon icon="save"></fa-icon>
-      </button>
-      <button class="btn btn-outline-danger" ngbTooltip="Cancel" placement="top">
-        <fa-icon icon="times"></fa-icon>
-      </button>
+<form class="form" [formGroup]="actionForm" (ngSubmit)="saveChanges()" novalidate>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary col-9">{{action.actionType}} | {{action.actionTarget}}</h6>
+      <div class="btn-group" *ngIf="isEditMode">
+        <button class="btn btn-outline-success" ngbTooltip="Save" placement="top" role="submit"
+                [disabled]="!actionForm.valid">
+          <fa-icon icon="save"></fa-icon>
+        </button>
+        <button class="btn btn-outline-danger" ngbTooltip="Cancel" placement="top" (click)="isEditMode = false;">
+          <fa-icon icon="times"></fa-icon>
+        </button>
+      </div>
+      <div class="btn-group" *ngIf="!isEditMode">
+        <button class="btn btn-outline-warning" ngbTooltip="Edit" placement="top" (click)="setEditMode(true)">
+          <fa-icon icon="pen"></fa-icon>
+        </button>
+        <button class="btn btn-outline-danger" ngbTooltip="Delete" placement="top" (click)="deleteAction()">
+          <fa-icon icon="trash"></fa-icon>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="card-body">
-    <div *ngIf="isEditMode">
-
-      <form class="form" [formGroup]="actionForm" novalidate>
+    <div class="card-body">
+      <div>
         <label for="type" class="form-label">Action Type</label>
-        <select id="type" class="form-select custom-select mb-2" formControlName="typeSelector">
+        <select id="type" class="form-select custom-select mb-2" formControlName="typeSelector"
+                (change)="onTypeChanged()" *ngIf="isEditMode">
           <option *ngFor="let type of actionTypes" value="{{type}}">{{type}}</option>
         </select>
+        <label class="form-label d-block ml-2 text-dark" *ngIf="!isEditMode">{{action.actionType}}</label>
 
         <label for="target" class="form-label">Target URL</label>
         <input id="target" type="text" placeholder="Target" class="form-control" value="{{action.actionTarget}}"
-               (keydown)="validateTarget()" required>
-      </form>
-
+               formControlName="target" *ngIf="isEditMode">
+        <label class="form-label d-block ml-2 text-dark" *ngIf="!isEditMode">{{action.actionTarget}}</label>
+        <div *ngIf="controls.target.invalid" class="alert alert-danger mt-1">
+          <div *ngIf="controls.target.errors?.required">Please provide a target</div>
+          <div *ngIf="controls.target.errors?.email">Please provide a valid email address</div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</form>

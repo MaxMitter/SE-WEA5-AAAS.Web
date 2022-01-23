@@ -24,6 +24,7 @@ export class CountermetricComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 15,
       processing: true,
+      data: this.metricList,
       language: {
         processing: '<fa-icon icon="spinner" spin></fa-icon>'
       },
@@ -39,7 +40,6 @@ export class CountermetricComponent implements OnInit {
       }],
       destroy: true
     };
-    this.dtOptions.data = this.metricList;
 
     this.reloadData();
   }

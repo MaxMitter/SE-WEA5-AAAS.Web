@@ -31,4 +31,10 @@ export class ActionsComponent implements OnInit {
     this.currentClientInstance = clientInstance;
     this.loadActions();
   }
+
+  deleteAction(actionId: string) {
+    if (this.actionService.deleteAction(actionId).subscribe()) {
+      this.actionList = this.actionList.filter(action => action.id != actionId);
+    }
+  }
 }
