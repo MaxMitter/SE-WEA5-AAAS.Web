@@ -1,9 +1,0 @@
-<div class="card">
-  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-    <h6 class="m-0 font-weight-bold text-primary">{{ client.identifier }} Status</h6>
-  </div>
-  <div class="card-body">
-    <h1 class="font-weight-bold text-danger" *ngIf="!detector?.isActive">Offline</h1>
-    <h1 class="font-weight-bold text-success" *ngIf="detector?.isActive">Online</h1>
-  </div>
-</div>
