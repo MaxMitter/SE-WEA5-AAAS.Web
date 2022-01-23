@@ -16,6 +16,8 @@ export class Detector {
     public isActive?: boolean
   ) {
   }
+
+  // public isNew: boolean = false;
 }
 
 export enum ListOperation {

@@ -15,7 +15,10 @@ import {TimespanToTicksPipe} from "../../pipes/timespan-to-ticks-pipe";
 export class DetectorCardComponent implements OnInit {
 
   @Output() onDetectorDelete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onNewDetectorSave: EventEmitter<any> = new EventEmitter<any>();
   @Input() detector: Detector = new Detector();
+  @Input() isNew: boolean = false;
+  @Input() currentClientId: string = "";
   selectedAction: Action = new Action();
   actions: Action[] = [];
 
@@ -32,6 +35,14 @@ export class DetectorCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if(this.isNew)
+      this.isEditMode = true;
+
+    this.initForm();
+  }
+
+  private initForm() {
     let pipe = new TicksToTimespanPipe();
     let fromTime = pipe.transform(this.detector.fromTime);
     let toTime = pipe.transform(this.detector.toTime);
@@ -56,7 +67,7 @@ export class DetectorCardComponent implements OnInit {
       operationSelector: [null],
     });
     this.detectorForm.get("operationSelector")?.setValue(this.detector.listOperation);
-    this.actionService.getAllByClientInstanceId(this.detector.clientInstanceId ?? '').subscribe(res => {
+    this.actionService.getAllByClientInstanceId(this.detector.clientInstanceId?? this.currentClientId).subscribe(res => {
       this.actions = res
       this.actions.forEach(action => {
         if (action.id == this.detector.detectorActionId) {
@@ -80,7 +91,7 @@ export class DetectorCardComponent implements OnInit {
 
   get fromTimeValid() {
     return this.controls.fromTimeHours.valid && this.controls.fromTimeMinutes.valid
-        && this.controls.fromTimeSeconds.valid && this.controls.fromTimeMilliseconds.valid;
+      && this.controls.fromTimeSeconds.valid && this.controls.fromTimeMilliseconds.valid;
   }
 
   get toTimeValid() {
@@ -103,30 +114,60 @@ export class DetectorCardComponent implements OnInit {
       this.controls.toTimeMilliseconds.value,
     );
 
-    let updated = new Detector(
-      this.detector.id,
-      this.detector.clientInstanceId,
-      this.controls.measurementName.value,
-      this.controls.detectorName.value,
-      this.controls.minValue.value,
-      this.controls.maxValue.value,
-      this.controls.detectorInterval.value,
-      pipe.transform(fromTime),
-      pipe.transform(toTime),
-      this.controls.lastMeasures.value,
-      this.controls.operationSelector.value,
-      this.controls.maxOutliers.value,
-      this.selectedAction.id,
-      this.detector.isActive
-    );
+    if (this.isNew) {
+      let newDetector = new Detector(
+        undefined,
+        this.detector.clientInstanceId ?? this.currentClientId,
+        this.controls.measurementName.value,
+        this.controls.detectorName.value,
+        this.controls.minValue.value,
+        this.controls.maxValue.value,
+        this.controls.detectorInterval.value,
+        pipe.transform(fromTime),
+        pipe.transform(toTime),
+        this.controls.lastMeasures.value,
+        this.controls.operationSelector.value,
+        this.controls.maxOutliers.value,
+        this.controls.actionSelector.value,
+        false
+      );
 
-    if (this.detectorService.update(updated).subscribe()) {
-      this.detector = updated;
-      this.isEditMode = false;
+      this.detectorService.save(newDetector).subscribe();
+      this.onNewDetectorSave.emit(newDetector);
+    } else {
+      let updated = new Detector(
+        this.detector.id,
+        this.detector.clientInstanceId,
+        this.controls.measurementName.value,
+        this.controls.detectorName.value,
+        this.controls.minValue.value,
+        this.controls.maxValue.value,
+        this.controls.detectorInterval.value,
+        pipe.transform(fromTime),
+        pipe.transform(toTime),
+        this.controls.lastMeasures.value,
+        this.controls.operationSelector.value,
+        this.controls.maxOutliers.value,
+        this.controls.actionSelector.value,
+        this.detector.isActive
+      );
+
+      if (this.detectorService.update(updated).subscribe()) {
+        this.detector = updated;
+        this.isEditMode = false;
+      }
     }
   }
 
   deleteDetector() {
     this.onDetectorDelete.emit(this.detector.id);
+  }
+
+  cancelEdit() {
+    if (this.isNew)
+      this.deleteDetector();
+
+    this.isEditMode = false;
+    this.initForm();
   }
 }
