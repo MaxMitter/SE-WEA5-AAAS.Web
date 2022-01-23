@@ -44,7 +44,12 @@ export class DetectorService {
   }
 
   update(detector: Detector) : Observable<boolean> {
-    return this.http.put<any>(`${this.basePath}`, detector, {'headers': this.header})
+    return this.http.put<any>(`${this.basePath}/${detector.id}`, detector, {'headers': this.header})
+      .pipe(map(res => res), catchError(this.errorHandler));
+  }
+
+  delete(detectorId: string): Observable<boolean> {
+    return this.http.delete<any>(`${this.basePath}/${detectorId}`, {'headers': this.header})
       .pipe(map(res => res), catchError(this.errorHandler));
   }
 }

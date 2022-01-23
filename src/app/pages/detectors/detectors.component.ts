@@ -35,6 +35,7 @@ export class DetectorsComponent implements OnInit {
   }
 
   removeDetector(detectorId: string) {
-    this.detectorList = this.detectorList.filter(detector => detector.id != detectorId);
+    if (this.detectorService.delete(detectorId).subscribe())
+      this.detectorList = this.detectorList.filter(detector => detector.id != detectorId);
   }
 }

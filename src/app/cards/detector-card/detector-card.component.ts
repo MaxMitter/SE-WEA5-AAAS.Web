@@ -4,7 +4,8 @@ import {DetectorService} from "../../shared/detector/detector.service";
 import {Action} from "../../shared/action/action";
 import {ActionService} from "../../shared/action/action.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TicksToTimespanPipe} from "../../pipes/ticksToTimespanPipe";
+import {TicksToTimespanPipe, TimespanContainer} from "../../pipes/ticksToTimespanPipe";
+import {TimespanToTicksPipe} from "../../pipes/timespan-to-ticks-pipe";
 
 @Component({
   selector: 'app-detector-card',
@@ -18,7 +19,7 @@ export class DetectorCardComponent implements OnInit {
   selectedAction: Action = new Action();
   actions: Action[] = [];
 
-  isEditMode: boolean = true;
+  isEditMode: boolean = false;
   detectorForm!: FormGroup;
 
   operations = Object.keys(ListOperation);
@@ -88,11 +89,44 @@ export class DetectorCardComponent implements OnInit {
   }
 
   onSubmit() {
+    let pipe = new TimespanToTicksPipe();
+    let fromTime = new TimespanContainer(
+      this.controls.fromTimeHours.value,
+      this.controls.fromTimeMinutes.value,
+      this.controls.fromTimeSeconds.value,
+      this.controls.fromTimeMilliseconds.value,
+    );
+    let toTime = new TimespanContainer(
+      this.controls.toTimeHours.value,
+      this.controls.toTimeMinutes.value,
+      this.controls.toTimeSeconds.value,
+      this.controls.toTimeMilliseconds.value,
+    );
 
+    let updated = new Detector(
+      this.detector.id,
+      this.detector.clientInstanceId,
+      this.controls.measurementName.value,
+      this.controls.detectorName.value,
+      this.controls.minValue.value,
+      this.controls.maxValue.value,
+      this.controls.detectorInterval.value,
+      pipe.transform(fromTime),
+      pipe.transform(toTime),
+      this.controls.lastMeasures.value,
+      this.controls.operationSelector.value,
+      this.controls.maxOutliers.value,
+      this.selectedAction.id,
+      this.detector.isActive
+    );
+
+    if (this.detectorService.update(updated).subscribe()) {
+      this.detector = updated;
+      this.isEditMode = false;
+    }
   }
 
   deleteDetector() {
     this.onDetectorDelete.emit(this.detector.id);
-    // TODO remove detector
   }
 }
