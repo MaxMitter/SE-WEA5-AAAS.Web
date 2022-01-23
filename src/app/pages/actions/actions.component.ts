@@ -12,6 +12,8 @@ export class ActionsComponent implements OnInit {
 
   currentClientInstance: ClientInstance | null = null;
   actionList: Action[] = [];
+  showNewForm: boolean = false;
+  newAction: Action = new Action();
 
   constructor(
     private actionService: ActionService
@@ -36,5 +38,13 @@ export class ActionsComponent implements OnInit {
     if (this.actionService.deleteAction(actionId).subscribe()) {
       this.actionList = this.actionList.filter(action => action.id != actionId);
     }
+  }
+
+  addAction() {
+
+  }
+
+  onNewAction() {
+    this.showNewForm = true;
   }
 }

@@ -50,14 +50,13 @@ export class LinechartComponent extends Basechart implements OnInit {
       for (let metric of this.metricList[i]) {
         if (metric.counter !== null) {
           this.data.datasets[i].data.push(metric.counter);
-          this.data.labels.push(metric.createdAtDate);
         } else if (metric.endedAt !== null) {
           this.data.datasets[i].data.push(metric.timespan)
-          this.data.labels.push(metric.createdAtDate);
         } else if (metric.measurement !== null) {
           this.data.datasets[i].data.push(metric.measurement)
-          this.data.labels.push(metric.createdAtDate);
         }
+        if (!this.data.labels.includes(metric.createdAtDate))
+          this.data.labels.push(metric.createdAtDate);
       }
     }
   }

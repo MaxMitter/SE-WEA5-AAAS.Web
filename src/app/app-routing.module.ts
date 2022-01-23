@@ -30,35 +30,35 @@ const routes: Routes = [
   }, {
     path: 'dash',
     component: DashComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'detectors',
     component: DetectorsComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'actions',
     component: ActionsComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'clients',
     component: ClientsComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'countermetric',
     component: CountermetricComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'timespanmetric',
     component: TimespanmetricComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'measurementmetric',
     component: MeasurementmetricComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'logmessage',
     component: LogmessageComponent,
-    canActivate: [CanNavigateToAdminGuard]
+    // canActivate: [CanNavigateToAdminGuard]
   }
 ];
 

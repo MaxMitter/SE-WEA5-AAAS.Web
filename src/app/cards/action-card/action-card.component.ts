@@ -13,6 +13,8 @@ export class ActionCardComponent implements OnInit {
 
   @Input() action = new Action();
   @Output() onActionDelete = new EventEmitter<any>();
+  @Input() isNew: boolean = false;
+  @Input() clientInstanceId: string = "";
   isEditMode: boolean = false;
   actionForm!: FormGroup;
   actionTypes = Object.keys(ActionType);
@@ -28,6 +30,10 @@ export class ActionCardComponent implements OnInit {
     })
 
     this.onTypeChanged();
+
+    if (this.isNew) {
+      this.isEditMode = true;
+    }
   }
 
   get controls() {
@@ -37,9 +43,15 @@ export class ActionCardComponent implements OnInit {
   saveChanges(): void {
     this.action.actionType = this.controls.typeSelector.value;
     this.action.actionTarget = this.controls.target.value;
-    console.log(this.action);
-    if (this.actionService.updateAction(this.action).subscribe())
+
+    if (this.isNew) {
+      this.action.clientInstanceId = this.clientInstanceId;
+      this.actionService.createAction(this.action).subscribe();
       this.isEditMode = false;
+    } else {
+      if (this.actionService.updateAction(this.action).subscribe())
+        this.isEditMode = false;
+    }
   }
 
   onTypeChanged() {

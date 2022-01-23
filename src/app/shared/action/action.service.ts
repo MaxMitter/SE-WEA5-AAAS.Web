@@ -42,4 +42,8 @@ export class ActionService {
   deleteAction(actionId: string): Observable<boolean> {
     return this.http.delete<any>(`${this.basePath}/${actionId}`, {'headers': this.header});
   }
+
+  createAction(action: Action): Observable<boolean> {
+    return this.http.post<any>(`${this.basePath}`, action, {'headers': this.header});
+  }
 }
