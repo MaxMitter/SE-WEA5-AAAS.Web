@@ -92,5 +92,3 @@ Logmessages werden in einer ähnlichen Tabelle wie Metriken dargestellt. Auch di
 Wird die Website zum ersten mal geöffnet, sieht der Nutzer nur einen Button, der zum Login auffordert. Durch klick auf den Button wird der Nutzer auf den Identity-Server  von Manfred Steyr weitergeleitet. Nach dem Login kann die Seite ohne Einschränkungen verwendet werden.
 
 ![Login](images/login.png)
-
-Obwohl der Login genau nach Anleitung aus der Übung implementiert wurde, scheint die Authentifizierung nicht zu funktionieren. Auch nach langer Fehlersuche mit zwei Kollegen konnte ich den Fehler nicht finden, da auch keine Fehlermeldung oder ähnliches ausgegeben wird. Meine Vermutung nach liegt es daran, dass die Tokens nicht im Session Storage gespeichert werden, obwohl ich mir nicht erklären kann warum das so ist. Da mir die Zeit fehlt, den Fehler genauer zu untersuchen, habe ich die NavigationGuards im routing-File für die Abgabe auskommentiert.
