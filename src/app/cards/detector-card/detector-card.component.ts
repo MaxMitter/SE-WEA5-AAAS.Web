@@ -14,17 +14,11 @@ import {TicksToTimespanPipe} from "../../pipes/ticksToTimespanPipe";
 export class DetectorCardComponent implements OnInit {
 
   @Output() onDetectorDelete: EventEmitter<any> = new EventEmitter<any>();
-
-  autohideToast: boolean = true;
-  show: boolean = false;
-  selectedAction: Action = new Action();
-
   @Input() detector: Detector = new Detector();
-
+  selectedAction: Action = new Action();
   actions: Action[] = [];
 
-  isEditMode: boolean = false;
-  isValid: boolean = true;
+  isEditMode: boolean = true;
   detectorForm!: FormGroup;
 
   operations = Object.keys(ListOperation);
@@ -37,20 +31,10 @@ export class DetectorCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.actionService.getAllByClientInstanceId(this.detector.clientInstanceId ?? '').subscribe(res => {
-      this.actions = res
-      this.actions.forEach(action => {
-        if (action.id == this.detector.detectorActionId) {
-          this.selectedAction = action;
-          this.detectorForm.get("actionSelector")?.setValue(action.id);
-          return;
-        }
-      });
-    });
-
     let pipe = new TicksToTimespanPipe();
     let fromTime = pipe.transform(this.detector.fromTime);
     let toTime = pipe.transform(this.detector.toTime);
+
     this.detectorForm = this.fb.group({
       detectorName: [this.detector.name, [Validators.required]],
       measurementName: [this.detector.measurementName, [Validators.required]],
@@ -68,60 +52,43 @@ export class DetectorCardComponent implements OnInit {
       lastMeasures: [this.detector.lastMeasures, [Validators.min(0)]],
       maxOutliers: [this.detector.maxOutliers, [Validators.min(0)]],
       actionSelector: [null],
-      operationSelector: [null]
+      operationSelector: [null],
     });
     this.detectorForm.get("operationSelector")?.setValue(this.detector.listOperation);
-  }
-
-  onChange() {
-    this.detectorForm.controls["detectorName"].setValidators(Validators.requiredTrue);
-    this.detectorForm.controls["measurementName"].setValidators(Validators.requiredTrue);
-    this.detectorForm.controls["detectorInterval"].setValidators(Validators.min(0));
-    this.detectorForm.controls["detectorInterval"].setValidators(Validators.min(0));
-    this.detectorForm.controls["fromTimeHours"].setValidators(Validators.min(0));
-    this.detectorForm.controls["fromTimeMinutes"].setValidators(Validators.min(0));
-    this.detectorForm.controls["fromTimeSeconds"].setValidators(Validators.min(0));
-    this.detectorForm.controls["fromTimeSeconds"].setValidators(Validators.min(0));
-    this.detectorForm.controls["fromTimeMilliseconds"].setValidators(Validators.min(0));
-    this.detectorForm.controls["toTimeHours"].setValidators(Validators.min(0));
-    this.detectorForm.controls["toTimeMinutes"].setValidators(Validators.min(0));
-    this.detectorForm.controls["toTimeSeconds"].setValidators(Validators.min(0));
-    this.detectorForm.controls["toTimeMilliseconds"].setValidators(Validators.min(0));
-    this.detectorForm.controls["minValue"].setValidators(Validators.min(0));
-    this.detectorForm.controls["maxValue"].setValidators(Validators.min(0));
-    this.detectorForm.controls["lastMeasures"].setValidators(Validators.min(0));
-    this.detectorForm.controls["maxOutliers"].setValidators(Validators.min(0));
+    this.actionService.getAllByClientInstanceId(this.detector.clientInstanceId ?? '').subscribe(res => {
+      this.actions = res
+      this.actions.forEach(action => {
+        if (action.id == this.detector.detectorActionId) {
+          this.selectedAction = action;
+          this.detectorForm.get("actionSelector")?.setValue(action.id);
+          return;
+        }
+      });
+    });
   }
 
   toggleDetector() {
     this.detector.isActive = !this.detector.isActive;
     if (this.detectorService.update(this.detector)) {
-      this.show = true;
     }
   }
 
-  displayFieldCss(field: string) {
-    return {
-      'alert-danger': !this.isFieldValid(field)
-    }
+  get controls() {
+    return this.detectorForm.controls;
   }
 
-  isFieldValid(field: string) {
-    console.log(`${field} is valid? ${this.detectorForm.get(field)?.valid}, was touched? ${this.detectorForm.get(field)?.touched}`);
-    console.log(this.detectorForm.get(field));
-    return this.detectorForm.get(field)?.valid && !this.detectorForm.get(field)?.touched;
+  get fromTimeValid() {
+    return this.controls.fromTimeHours.valid && this.controls.fromTimeMinutes.valid
+        && this.controls.fromTimeSeconds.valid && this.controls.fromTimeMilliseconds.valid;
+  }
+
+  get toTimeValid() {
+    return this.controls.toTimeHours.valid && this.controls.toTimeMinutes.valid
+      && this.controls.toTimeSeconds.valid && this.controls.toTimeMilliseconds.valid;
   }
 
   onSubmit() {
-    if (this.detectorForm.valid) {
-      console.log("valid");
-      //this.clientService.updateClient(this.client.id, this.form.get('identifier')?.value).subscribe(res => {});
-      this.isValid = true;
-      this.isEditMode = false;
-    } else {
-      console.log("invalid");
-      this.isValid = false;
-    }
+
   }
 
   deleteDetector() {

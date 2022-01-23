@@ -1,18 +1,21 @@
-<form *ngIf="isEditMode" (ngSubmit)="onSubmit()">
+<form *ngIf="isEditMode" (ngSubmit)="onSubmit()" [formGroup]="detectorForm" novalidate>
   <div class="card shadow m-2">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-      <input type="text" class="m-0 font-weight-bold text-primary col-9 mr-2"
-             value="{{detector.name}}" id="detectorName">
+      <input type="text" class="form-control m-0 font-weight-bold text-primary col-9 mr-2"
+             value="{{detector.name}}" id="detectorName" formControlName="detectorName">
       <button class="btn btn-success col-2 mr-1" *ngIf="!detector.isActive" (click)="toggleDetector()">Activate</button>
       <button class="btn btn-danger col-2 mr-1" *ngIf="detector.isActive" (click)="toggleDetector()">Deactivate</button>
       <div class="btn-group">
-        <button class="btn btn-outline-success" role="submit" (click)="onSubmit()">
+        <button class="btn btn-outline-success" role="submit" (click)="onSubmit()" [disabled]="!detectorForm.valid">
           <fa-icon icon="save"></fa-icon>
         </button>
         <button class="btn btn-outline-danger">
           <fa-icon icon="times"></fa-icon>
         </button>
       </div>
+    </div>
+    <div *ngIf="!controls.detectorName.valid" class="alert alert-danger">
+      Detector Name cannot be empty!
     </div>
     <div class="card-body">
       <div class="row">
@@ -22,19 +25,17 @@
               <div class="form-group mb-2">
                 <label for="measurementName" class="form-label mr-2">Measurement Name:</label>
                 <input id="measurementName" type="text" placeholder="Measurement Name" class="form-control"
-                       value="{{detector.measurementName}}" [ngClass]="displayFieldCss('measurementName')"
-                       (change)="onChange()" required>
-                <div class="text-danger" *ngIf="!isFieldValid('detectorInterval')">
+                       value="{{detector.measurementName}}" formControlName="measurementName">
+                <div class="alert alert-danger mt-1" *ngIf="!controls.measurementName.valid">
                   Cannot be empty (Please ensure that the entered Measurement is Valid).
                 </div>
               </div>
               <div class="form-group mb-2">
                 <label for="detectorInterval" class="form-label mr-2">Interval (in Milliseconds):</label>
                 <input id="detectorInterval" type="number" placeholder="Interval in ms" class="form-control"
-                       [ngClass]="displayFieldCss('detectorInterval')"
-                       value="{{detector.detectorInterval}}">
-                <div class="form-group text-danger" *ngIf="!isFieldValid('detectorInterval')">
-                  Interval has to be > 0!
+                       value="{{detector.detectorInterval}}" formControlName="detectorInterval">
+                <div class="alert alert-danger mt-1" *ngIf="!controls.detectorInterval.valid">
+                  Interval has to be greater than 0!
                 </div>
               </div>
               <div class="form-group mb-2 container p-0">
@@ -42,39 +43,34 @@
                   <div class="d-inline col">
                     <label for="fromTimeHours" class="form-label mr-2 d-block">From Time:</label>
                     <input id="fromTimeHours" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.fromTime | TicksToTimespanPipe).hours}}" min="0"
-                           [ngClass]="displayFieldCss('fromTimeHours')">
+                           value="{{ (detector.fromTime | TicksToTimespanPipe).hours}}" min="0" formControlName="fromTimeHours">
                     <p class="d-inline ml-1 mr-1">:</p>
                     <input id="fromTimeMinutes" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.fromTime | TicksToTimespanPipe).mins}}" min="0"
-                           [ngClass]="displayFieldCss('fromTimeMinutes')">
+                           value="{{ (detector.fromTime | TicksToTimespanPipe).mins}}" min="0" formControlName="fromTimeMinutes">
                     <p class="d-inline ml-1 mr-1">:</p>
                     <input id="fromTimeSeconds" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.fromTime | TicksToTimespanPipe).secs}}" min="0"
-                           [ngClass]="displayFieldCss('fromTimeSeconds')">
+                           value="{{ (detector.fromTime | TicksToTimespanPipe).secs}}" min="0" formControlName="fromTimeSeconds">
                     <p class="d-inline ml-1 mr-1">.</p>
                     <input id="fromTimeMilliseconds" type="number" class="form-control d-inline col-3 text-center p-0"
-                           value="{{ (detector.fromTime | TicksToTimespanPipe).ms}}" min="0"
-                           [ngClass]="displayFieldCss('fromTimeMilliseconds')">
+                           value="{{ (detector.fromTime | TicksToTimespanPipe).ms}}" min="0" formControlName="fromTimeMilliseconds">
                   </div>
                   <div class="d-inline col">
                     <label for="toTimeHours" class="form-label mr-2 d-block">To Time:</label>
                     <input id="toTimeHours" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.toTime | TicksToTimespanPipe).hours}}" min="0"
-                           [ngClass]="displayFieldCss('toTimeHours')">
+                           value="{{ (detector.toTime | TicksToTimespanPipe).hours}}" min="0" formControlName="toTimeHours">
                     <p class="d-inline ml-1 mr-1">:</p>
                     <input id="toTimeMinutes" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.toTime | TicksToTimespanPipe).mins}}" min="0"
-                           [ngClass]="displayFieldCss('toTimeMinutes')">
+                           value="{{ (detector.toTime | TicksToTimespanPipe).mins}}" min="0" formControlName="toTimeMinutes">
                     <p class="d-inline ml-1 mr-1">:</p>
                     <input id="toTimeSeconds" type="number" class="form-control d-inline col-2 text-center p-0"
-                           value="{{ (detector.toTime | TicksToTimespanPipe).secs}}" min="0"
-                           [ngClass]="displayFieldCss('toTimeSeconds')">
+                           value="{{ (detector.toTime | TicksToTimespanPipe).secs}}" min="0" formControlName="toTimeSeconds">
                     <p class="d-inline ml-1 mr-1">.</p>
                     <input id="toTimeMilliseconds" type="number" class="form-control d-inline col-3 text-center p-0"
-                           value="{{ (detector.toTime | TicksToTimespanPipe).ms}}" min="0"
-                           [ngClass]="displayFieldCss('toTimeMilliseconds')">
+                           value="{{ (detector.toTime | TicksToTimespanPipe).ms}}" min="0" formControlName="toTimeMilliseconds">
                   </div>
+                </div>
+                <div class="alert alert-danger mt-1" *ngIf="!fromTimeValid || !toTimeValid">
+                  Times cannot be negative!
                 </div>
               </div>
 
@@ -101,22 +97,34 @@
           <div class="form-group mb-2">
             <label for="minValue" class="form-label mr-2">Minimum Value:</label>
             <input id="minValue" type="number" placeholder="Minimum Value" class="form-control"
-                   value="{{detector.minValue}}" min="0" [ngClass]="displayFieldCss('minValue')">
+                   value="{{detector.minValue}}" min="0" formControlName="minValue">
+            <div class="alert alert-danger mt-1" *ngIf="!controls.minValue.valid">
+              MinValue cannot be negative!
+            </div>
           </div>
           <div class="form-group mb-2">
             <label for="maxValue" class="form-label mr-2">Maximum Value:</label>
             <input id="maxValue" type="number" placeholder="Maximum Value" class="form-control"
-                   value="{{detector.maxValue}}" min="0" [ngClass]="displayFieldCss('maxValue')">
+                   value="{{detector.maxValue}}" min="0" formControlName="maxValue">
+            <div class="alert alert-danger mt-1" *ngIf="!controls.maxValue.valid">
+              MaxValue cannot be negative!
+            </div>
           </div>
           <div class="form-group mb-2">
             <label for="lastMeasures" class="form-label mr-2">Last Measures:</label>
             <input id="lastMeasures" type="number" placeholder="Last Measures" class="form-control"
-                   value="{{detector.lastMeasures}}" min="0" [ngClass]="displayFieldCss('lastMeasures')">
+                   value="{{detector.lastMeasures}}" min="0" formControlName="lastMeasures">
+            <div class="alert alert-danger mt-1" *ngIf="!controls.lastMeasures.valid">
+              Last Measures cannot be negative!
+            </div>
           </div>
           <div class="form-group mb-2">
             <label for="maxOutliers" class="form-label mr-2">Max Outliers:</label>
             <input id="maxOutliers" type="number" placeholder="Max Outliers" class="form-control"
-                   value="{{detector.maxOutliers}}" min="0" [ngClass]="displayFieldCss('maxOutliers')">
+                   value="{{detector.maxOutliers}}" min="0" formControlName="maxOutliers">
+            <div class="alert alert-danger mt-1" *ngIf="!controls.maxOutliers.valid">
+              MaxOutliers cannot be negative!
+            </div>
           </div>
         </div>
       </div>
@@ -155,30 +163,39 @@
               <div class="row">
                 <div class="d-inline col">
                   <label for="fromTimeHours" class="form-label mr-2 d-block">From Time:</label>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).hours}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).hours}}</label>
                   <p class="d-inline ml-1 mr-1">:</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).mins}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).mins}}</label>
                   <p class="d-inline ml-1 mr-1">:</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).secs}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).secs}}</label>
                   <p class="d-inline ml-1 mr-1">.</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).ms}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.fromTime | TicksToTimespanPipe).ms}}</label>
                 </div>
                 <div class="d-inline col">
                   <label for="toTimeHours" class="form-label mr-2 d-block">To Time:</label>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).hours}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).hours}}</label>
                   <p class="d-inline ml-1 mr-1">:</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).mins}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).mins}}</label>
                   <p class="d-inline ml-1 mr-1">:</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).secs}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).secs}}</label>
                   <p class="d-inline ml-1 mr-1">.</p>
-                  <label class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).ms}}</label>
+                  <label
+                    class="form-label border-bottom border-dark p-1 col-2 text-end">{{(detector.toTime | TicksToTimespanPipe).ms}}</label>
                 </div>
               </div>
             </div>
 
             <div class="form-group mb-2">
               <label for="detectorAction" class="form-label mr-2">Action:</label>
-              <label class="form-label border-bottom border-dark p-1 d-block">{{selectedAction.actionType + " | " + selectedAction.actionTarget}}</label>
+              <label
+                class="form-label border-bottom border-dark p-1 d-block">{{selectedAction.actionType + " | " + selectedAction.actionTarget}}</label>
             </div>
 
             <div class="form-group mb-2">
@@ -210,15 +227,3 @@
     </div>
   </div>
 </div>
-
-<ngb-toast
-  *ngIf="show"
-  header="Detector toggled!"
-  [delay]="5000"
-  [autohide]="autohideToast"
-  (mouseenter)="autohideToast = false"
-  (mouseleave)="autohideToast = true">
-  <div>
-    Detector was successfully toggled
-  </div>
-</ngb-toast>
