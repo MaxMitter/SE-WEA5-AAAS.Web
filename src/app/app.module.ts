@@ -32,6 +32,7 @@ import { CountermetricComponent } from './pages/countermetric/countermetric.comp
 import { TimespanmetricComponent } from './pages/timespanmetric/timespanmetric.component';
 import { MeasurementmetricComponent } from './pages/measurementmetric/measurementmetric.component';
 import { LogmessageComponent } from './pages/logmessage/logmessage.component';
+import {TimespanToTicksPipe} from "./pipes/timespan-to-ticks-pipe";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LogmessageComponent } from './pages/logmessage/logmessage.component';
     DetectorCardComponent,
     TicksToDatePipe,
     TicksToTimespanPipe,
+    TimespanToTicksPipe,
     ActionCardComponent,
     EditChartComponent,
     LinechartComponent,

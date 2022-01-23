@@ -1,4 +1,3 @@
-import {formatDate} from "@angular/common";
 import {Pipe, PipeTransform} from "@angular/core";
 
 @Pipe({
@@ -6,20 +5,23 @@ import {Pipe, PipeTransform} from "@angular/core";
 })
 
 export class TicksToTimespanPipe implements PipeTransform {
-  transform(value: number | undefined): timespanContainer {
+  transform(value: number | undefined): TimespanContainer {
     if (value !== undefined) {
       let time = value;
       let hours = Math.floor((time / (60 * 60 * 10e6)) % 24);
+      time -= hours * 60 * 60 * 10e6;
       let mins = Math.floor((time / (60 * 10e6)) % 60);
+      time -= mins * 60 * 10e6;
       let sec = Math.floor((time / 10e6) % 60);
+      time -= sec * 10e6;
       let ms = Math.floor(time / 10e6);
 
-      return new timespanContainer(hours, mins, sec, ms);
-    } else return new timespanContainer(0, 0, 0, 0);
+      return new TimespanContainer(hours, mins, sec, ms);
+    } else return new TimespanContainer(0, 0, 0, 0);
   }
 }
 
-class timespanContainer {
+export class TimespanContainer {
   public hours: number;
   public mins: number;
   public secs: number;
