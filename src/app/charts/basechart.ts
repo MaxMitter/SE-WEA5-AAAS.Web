@@ -11,7 +11,7 @@ export abstract class Basechart {
   clientList: Array<ClientInstance> = [];
   metricName: string = "";
 
-  constructor(
+  protected constructor(
     protected clientService: ClientService,
     protected metricService: MetricService
   ) {

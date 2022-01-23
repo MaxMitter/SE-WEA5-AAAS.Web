@@ -33,6 +33,8 @@ import { TimespanmetricComponent } from './pages/timespanmetric/timespanmetric.c
 import { MeasurementmetricComponent } from './pages/measurementmetric/measurementmetric.component';
 import { LogmessageComponent } from './pages/logmessage/logmessage.component';
 import {TimespanToTicksPipe} from "./pipes/timespan-to-ticks-pipe";
+import { LoginComponent } from './pages/login/login.component';
+import {OAuthModule} from "angular-oauth2-oidc";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import {TimespanToTicksPipe} from "./pipes/timespan-to-ticks-pipe";
     CountermetricComponent,
     TimespanmetricComponent,
     MeasurementmetricComponent,
-    LogmessageComponent
+    LogmessageComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import {TimespanToTicksPipe} from "./pipes/timespan-to-ticks-pipe";
     NgbModule,
     ChartModule,
     FormsModule,
+    OAuthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

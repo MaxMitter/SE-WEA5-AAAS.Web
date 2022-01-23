@@ -8,6 +8,8 @@ import {CountermetricComponent} from './pages/countermetric/countermetric.compon
 import {TimespanmetricComponent} from './pages/timespanmetric/timespanmetric.component';
 import {MeasurementmetricComponent} from './pages/measurementmetric/measurementmetric.component';
 import {LogmessageComponent} from "./pages/logmessage/logmessage.component";
+import {CanNavigateToAdminGuard} from "./can-navigate-to-admin.guard";
+import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
@@ -15,29 +17,48 @@ const routes: Routes = [
     redirectTo: 'dash',
     pathMatch: 'full'
   }, {
+    path: 'index.html',
+    redirectTo: 'dash',
+    pathMatch: 'full'
+  }, {
+    path: 'id_token',
+    redirectTo: 'dash',
+    pathMatch: 'full'
+  }, {
+    path: 'login',
+    component: LoginComponent
+  }, {
     path: 'dash',
-    component: DashComponent
+    component: DashComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'detectors',
-    component: DetectorsComponent
+    component: DetectorsComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'actions',
-    component: ActionsComponent
+    component: ActionsComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'clients',
-    component: ClientsComponent
+    component: ClientsComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'countermetric',
-    component: CountermetricComponent
+    component: CountermetricComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'timespanmetric',
-    component: TimespanmetricComponent
+    component: TimespanmetricComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'measurementmetric',
-    component: MeasurementmetricComponent
+    component: MeasurementmetricComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'logmessage',
-    component: LogmessageComponent
+    component: LogmessageComponent,
+    canActivate: [CanNavigateToAdminGuard]
   }
 ];
 
