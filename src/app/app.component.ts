@@ -22,10 +22,7 @@ export class AppComponent {
 
   private configureWithNewConfigApi() {
     this.oauthService.configure(authConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(r => this.auth.subject.subscribe(sub => {
-      this.isLoggedIn = sub;
-      console.log(sub);
-    }));
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.tryLogin();
   }
 }

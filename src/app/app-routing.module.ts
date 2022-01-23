@@ -30,7 +30,7 @@ const routes: Routes = [
   }, {
     path: 'dash',
     component: DashComponent,
-    // canActivate: [CanNavigateToAdminGuard]
+    canActivate: [CanNavigateToAdminGuard]
   }, {
     path: 'detectors',
     component: DetectorsComponent,
