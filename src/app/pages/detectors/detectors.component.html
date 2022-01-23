@@ -1,15 +1,22 @@
 <app-header [title]="'Detectors'" (onClientChanged)="onClientChanged($event[0])"></app-header>
 
-<div class="card m-2">
-  <button class="btn" (click)="newDetector()">
-    <div class="card-body bg-light text-lg">
-      <fa-icon icon="plus"></fa-icon>
-      New Detector
-    </div>
-  </button>
+<div class="alert" *ngIf="!currentClientInstance">
+  Please select a client to display its detectors.
 </div>
-<app-detector-card [isNew]="true" *ngIf="showNewForm" [currentClientId]="currentClientInstance?.id ?? ''"
-                   (onDetectorDelete)="removeDetector($event)" (onNewDetectorSave)="saveNewDetector($event)"></app-detector-card>
 
-<app-detector-card *ngFor="let detector of detectorList" [detector]="detector"
-                   (onDetectorDelete)="removeDetector($event)"></app-detector-card>
+<div *ngIf="currentClientInstance">
+  <div class="card m-2">
+    <button class="btn" (click)="newDetector()">
+      <div class="card-body bg-light text-lg">
+        <fa-icon icon="plus"></fa-icon>
+        New Detector
+      </div>
+    </button>
+  </div>
+  <app-detector-card [isNew]="true" *ngIf="showNewForm" [currentClientId]="currentClientInstance?.id ?? ''"
+                     (onDetectorDelete)="removeDetector($event)"
+                     (onNewDetectorSave)="saveNewDetector($event)"></app-detector-card>
+
+  <app-detector-card *ngFor="let detector of detectorList" [detector]="detector"
+                     (onDetectorDelete)="removeDetector($event)"></app-detector-card>
+</div>

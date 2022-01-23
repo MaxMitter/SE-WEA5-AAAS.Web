@@ -1,3 +1,9 @@
 <app-header [title]="'Actions'" (onClientChanged)="clientChangedEvent($event[0])"></app-header>
 
-<app-action-card *ngFor="let action of actionList" [action]=action (onActionDelete)="deleteAction($event)"></app-action-card>
+<div class="alert" *ngIf="!currentClientInstance">
+  Please select a client to display its actions.
+</div>
+<div *ngIf="currentClientInstance">
+  <app-action-card *ngFor="let action of actionList" [action]=action
+                   (onActionDelete)="deleteAction($event)"></app-action-card>
+</div>
