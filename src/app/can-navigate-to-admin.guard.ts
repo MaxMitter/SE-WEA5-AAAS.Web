@@ -13,11 +13,15 @@ export class CanNavigateToAdminGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.auth.isLoggedIn()) {
-      this.router.navigate(['/login']);
-      return false;
-    } else {
-      return true;
-    }
+    return (async () => {
+      // wait a bit for the tokens to be set, otherwise redirect to dashboard won't work
+      await new Promise(f => setTimeout(f, 200));
+      if (!this.auth.isLoggedIn()) {
+        this.router.navigate(['/login']);
+        return false;
+      } else {
+        return true;
+      }
+    })();
   }
 }

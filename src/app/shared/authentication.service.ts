@@ -18,7 +18,6 @@ export class AuthenticationService {
 
   isLoggedIn() {
     console.log(`logged in? ${this.oAuthService.hasValidAccessToken()} && ${this.oAuthService.hasValidIdToken()}`)
-    this.subject.next(this.oAuthService.hasValidAccessToken() && this.oAuthService.hasValidIdToken());
     return this.oAuthService.hasValidAccessToken() && this.oAuthService.hasValidIdToken();
   }
 }

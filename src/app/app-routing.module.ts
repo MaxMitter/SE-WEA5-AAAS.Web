@@ -21,6 +21,10 @@ const routes: Routes = [
     redirectTo: 'dash',
     pathMatch: 'full'
   }, {
+    path: 'index.html#',
+    redirectTo: 'dash',
+    pathMatch: 'full'
+  }, {
     path: 'id_token',
     redirectTo: 'dash',
     pathMatch: 'full'
